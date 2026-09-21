@@ -1,0 +1,16 @@
+{"id": "SDR_01", "final_conclusion": 0, "physical_reasoning": 0, "assumption_constraint_handling": 0, "failure_mode_trigger": false, "total_score": 0}
+{"id": "PMS_01", "final_conclusion": 0, "physical_reasoning": 0, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 0}
+{"id": "AVJ_01", "final_conclusion": 0, "physical_reasoning": 1, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 1}
+{"id": "KCM_01", "final_conclusion": 0, "physical_reasoning": 0, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 0}
+{"id": "AVJ_02", "final_conclusion": 0, "physical_reasoning": 0, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 0}
+{"id": "PMS_02", "final_conclusion": 0, "physical_reasoning": 0, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 0}
+{"id": "SDR_02", "final_conclusion": 1, "physical_reasoning": 1, "assumption_constraint_handling": 1, "failure_mode_trigger": false, "total_score": 3}
+{"id": "PMS_03", "final_conclusion": 0, "physical_reasoning": 0, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 0}
+{"id": "AVJ_03", "final_conclusion": 1, "physical_reasoning": 1, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 2}
+{"id": "KCM_02", "final_conclusion": 1, "physical_reasoning": 2, "assumption_constraint_handling": 1, "failure_mode_trigger": false, "total_score": 4}
+{"id": "KCM_03", "final_conclusion": 1, "physical_reasoning": 2, "assumption_constraint_handling": 1, "failure_mode_trigger": false, "total_score": 4}
+{"id": "PMS_04", "final_conclusion": 1, "physical_reasoning": 2, "assumption_constraint_handling": 1, "failure_mode_trigger": false, "total_score": 4}
+{"id": "KCM_04", "final_conclusion": 0, "physical_reasoning": 0, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 0}
+{"id": "AVJ_04", "final_conclusion": 1, "physical_reasoning": 1, "assumption_constraint_handling": 1, "failure_mode_trigger": false, "total_score": 3}
+{"id": "SDR_03", "final_conclusion": 1, "physical_reasoning": 1, "assumption_constraint_handling": 1, "failure_mode_trigger": false, "total_score": 3}
+{"id": "SDR_04", "final_conclusion": 0, "physical_reasoning": 0, "assumption_constraint_handling": 0, "failure_mode_trigger": true, "total_score": 0}
