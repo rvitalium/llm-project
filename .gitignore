@@ -1,4 +1,6 @@
 .venv/
 docs/
 .DS_Store/
-outputs/qwen_engineering_lora_v0_1/
+outputs/
+test_api.py/
+test_other_api.py/
