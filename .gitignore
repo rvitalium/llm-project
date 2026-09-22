@@ -1,4 +1,4 @@
 .venv/
 docs/
 .DS_Store/
-outputs/qwen_engineering_lora_v0_1
+outputs/qwen_engineering_lora_v0_1/
