@@ -2,7 +2,7 @@
 
 ## Overview
 
-Large language models can produce plausible engineering explanations while making subtle errors in physical reasoning. This project investigates whether targeted supervised fine-tuning can improve engineering reasoning in a small open-source language model—and how reliably those improvements can be measured.
+Large language models can produce plausible engineering explanations while making subtle errors in physical reasoning. This project investigates whether targeted supervised fine-tuning can improve engineering reasoning in a small open-source language model and how reliably those improvements can be measured.
 
 I developed a 16-question engineering reasoning benchmark, validated an LLM-based evaluator against expert annotations, created a targeted fine-tuning dataset, and fine-tuned Qwen2.5-1.5B-Instruct using LoRA.
 
@@ -53,10 +53,10 @@ Examples include:
 
 * confusing zero velocity with zero acceleration,
 * treating static friction as automatically equal to μN,
-* misapplying the two-force-member assumption,
+* misapplying the two-force member assumption,
 * failing to check rigid-body assumptions,
 * misinterpreting centripetal force or acceleration,
-* and reasoning incorrectly about constraint forces or free-body diagrams.
+* and reasoning incorrectly about constraint forces or free body diagrams.
 
 Each item contains a reference answer, reference reasoning, targeted failure mode, and scoring rubric.
 
@@ -79,9 +79,7 @@ This separates getting the right answer from reaching it through physically vali
 
 Responses were evaluated using **GPT-OSS-120B through the Groq API**.
 
-The evaluator receives the problem, reference answer, reference reasoning, targeted failure mode, rubric, and model response, then returns structured scores and a brief justification.
-
-Total score is calculated separately in Python.
+The evaluator receives the problem, reference answer, reference reasoning, targeted failure mode, rubric, and model response, then returns structured scores and a brief justification. Total score is calculated separately in Python.
 
 ### Judge Validation
 
@@ -92,9 +90,7 @@ Held-out agreement was:
 * **94.2%** across all rubric dimensions
 * **94.9%** across the three scored dimensions
 
-Validation also revealed two recurring limitations: the judge occasionally overestimated physical-reasoning quality and sometimes interpreted failure modes too literally.
-
-The evaluator configuration was then frozen before evaluating the fine-tuned model.
+Validation also revealed two recurring limitations: the judge occasionally overestimated physical-reasoning quality and sometimes interpreted failure modes too literally. The evaluator configuration was then frozen before evaluating the fine-tuned model.
 
 ---
 
@@ -196,25 +192,21 @@ I manually compared all 16 response pairs.
 | No meaningful change               |         7 |
 | Clear regression                   |         1 |
 
-Thus, **8 of 16 responses showed some qualitative improvement**, although several remained incomplete or ultimately incorrect.
-
-This is not equivalent to saying that fine-tuning improved performance on 50% of the benchmark. The expert categories capture reasoning changes that are finer-grained than the rubric.
+Thus, **8 of 16 responses showed some qualitative improvement**, although several remained incomplete or ultimately incorrect. This result is not equivalent to saying that fine-tuning improved performance on 50% of the benchmark. The expert categories capture reasoning changes that are finer-grained than the rubric.
 
 ### Selected Examples
 
 #### AVJ_02 — Better reasoning, same score
 
-The fine-tuned model correctly avoided assuming a magnitude for static friction, eliminating an important baseline misconception.
-
-However, it failed to complete the analysis using Newton's second law.
+The fine-tuned model correctly avoided assuming a magnitude for static friction, eliminating an important baseline misconception. However, it failed to complete the analysis using Newton's second law.
 
 **Automated score: 0 → 0**
 
-This illustrates how reasoning can improve without crossing a rubric threshold.
+This finding illustrates how reasoning can improve without crossing a rubric threshold.
 
 #### PMS_03 — Substantial improvement, incomplete correction
 
-The fine-tuned model reached the correct conclusion and provided much better physical reasoning, but still failed to recognize an important applicability condition for the two-force-member assumption.
+The fine-tuned model reached the correct conclusion and provided much better physical reasoning, but still failed to recognize an important applicability condition for the two-force member assumption.
 
 **Automated score: 0 → 2**
 
@@ -224,7 +216,7 @@ The fine-tuned model showed a stronger understanding of static versus kinetic fr
 
 **Automated score: 2 → 0**
 
-This shows why reasoning quality and task correctness cannot always be treated as equivalent.
+This result shows why reasoning quality and task correctness cannot always be treated as equivalent.
 
 #### KCM_04 — Valid alternative reasoning
 
@@ -236,23 +228,19 @@ This exposed a potential **reference-answer bias** in the evaluation process.
 
 #### SDR_01 — Genuine regression
 
-The fine-tuned model introduced an unsupported constant-radial-speed assumption, later conflated constant radial velocity with zero radial velocity, and failed to apply the relevant radial-force constraint.
-
-This represents a genuine reasoning regression.
+The fine-tuned model introduced an unsupported constant radial speed assumption, later conflated constant radial velocity with zero radial velocity, and failed to apply the relevant radial force constraint. This result represents a genuine reasoning regression.
 
 ---
 
 ## What Changed After Fine-Tuning?
 
-A recurring pattern was that the fine-tuned model sometimes improved at **local physical reasoning**—for example, discussing friction more appropriately or selecting a more relevant principle—while still struggling with higher-level questions such as:
+A recurring pattern was that the fine-tuned model sometimes improved at **local physical reasoning**. For example, discussing friction more appropriately or selecting a more relevant principle while still struggling with higher-level questions such as:
 
 * whether an assumption was valid,
 * whether a constraint was correctly applied,
 * or whether the reasoning actually supported the conclusion.
 
-This suggests a possible distinction between learning engineering reasoning patterns and learning **when those patterns are applicable**.
-
-The experiment is too small to establish that as a general result, but it provides a clear direction for future work.
+This finding suggests a possible distinction between learning engineering reasoning patterns and learning **when those patterns are applicable**. The experiment is too small to establish that as a general result, but it provides a clear direction for future work.
 
 ---
 
@@ -270,9 +258,7 @@ The experiment is too small to establish that as a general result, but it provid
 
 ## Limitations
 
-This is a small exploratory experiment.
-
-Key limitations include:
+This is a small exploratory experiment. Key limitations include:
 
 * 16 benchmark questions,
 * 64 fine-tuning examples,
@@ -282,7 +268,7 @@ Key limitations include:
 * one domain expert conducting the qualitative review,
 * and a benchmark focused mainly on undergraduate mechanics.
 
-The results should therefore be interpreted as observations about model behavior rather than statistically robust estimates of general engineering-reasoning performance.
+The results should therefore be interpreted as observations about model behavior rather than statistically robust estimates of general engineering reasoning performance.
 
 ---
 
@@ -313,11 +299,12 @@ data/
 results/
 ├── baseline_results.jsonl
 ├── baseline_evaluations.jsonl
+├── expert_annotations.jsonl
 ├── finetuned_results_v0_1.jsonl
 └── finetuned_evaluations_v0_1.jsonl
 
 baseline.py
-prepare_data.py
+prepare_finetuning_data.py
 train.py
 finetuned_baseline.py
 evaluate.py
@@ -328,14 +315,8 @@ analyze_results.py
 
 ## Summary
 
-This project began as an experiment in improving engineering reasoning through small-scale supervised fine-tuning.
-
-The aggregate result was simple:
+This project began as an experiment in improving engineering reasoning through small-scale supervised fine-tuning. The aggregate result was simple:
 
 **26/64 before fine-tuning and 25/64 afterward.**
 
-Closer analysis showed a more interesting pattern. Some responses became more physically informed, others remained unchanged, and one clearly regressed. Several of those reasoning changes were not captured by the automated rubric.
-
-The main lesson is that **changes in technical reasoning can be harder to measure than changes in final-answer accuracy**.
-
-For engineering applications of language models, improving the model and designing an evaluation capable of detecting that improvement are tightly coupled problems.
+Closer analysis showed a more interesting pattern. Some responses became more physically informed, others remained unchanged, and one clearly regressed. Several of those reasoning changes were not captured by the automated rubric. The main lesson is that **changes in technical reasoning can be harder to measure than changes in final-answer accuracy**. For engineering applications of language models, improving the model and designing an evaluation capable of detecting that improvement are tightly coupled problems.
